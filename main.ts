@@ -12,6 +12,24 @@ radio.onReceivedNumber(function (receivedNumber) {
         Dead = 1
     }
 })
+input.onButtonPressed(Button.A, function () {
+    if (Player_Option == 1) {
+        Player_Option = Player_Amount
+    } else {
+        Player_Option += -1
+    }
+})
+input.onButtonPressed(Button.AB, function () {
+    if (Night_Time == 1) {
+        Player_Choice = Player_Option
+        radio.sendNumber(Player_Option * 100)
+        Player_Choice = 0
+    } else {
+        Player_Choice = Player_Option
+        radio.sendNumber(Player_Option * 1000)
+        Player_Choice = 0
+    }
+})
 radio.onReceivedString(function (receivedString) {
     if (receivedString == "Werewolf Go") {
         if (Game_On == 1) {
@@ -19,32 +37,44 @@ radio.onReceivedString(function (receivedString) {
         }
     }
 })
+input.onButtonPressed(Button.B, function () {
+    if (Player_Option == Player_Amount) {
+        Player_Option = 1
+    } else {
+        Player_Option += 1
+    }
+})
 radio.onReceivedValue(function (name, value) {
     Player_Amount = value
 })
 let Player_Amount = 0
+let Player_Option = 0
+let Player_Choice = 0
 let Dead = 0
 let Night_Time = 0
 let Game_On = 0
 let TownWerewolf = 0
 let Player = 0
 radio.setGroup(173)
-Player = 1
+Player = 2
 TownWerewolf = 1
 Game_On = 0
 Night_Time = 0
 Dead = 0
+Player_Choice = 0
+Player_Option = Player
 basic.forever(function () {
     if (Dead == 1) {
         basic.showString("You Died")
-    }
-    if (Night_Time == 1) {
-        if (TownWerewolf == 2) {
-        	
-        } else {
-            basic.showString("ZZZ")
-        }
     } else {
-    	
+        if (Night_Time == 1) {
+            if (TownWerewolf == 2) {
+                basic.showNumber(Player_Option)
+            } else {
+                basic.showString("ZZZ")
+            }
+        } else {
+            basic.showNumber(Player_Option)
+        }
     }
 })
