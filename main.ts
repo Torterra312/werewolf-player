@@ -24,17 +24,12 @@ input.onButtonPressed(Button.AB, function () {
         Player_Choice = Player_Option
         radio.sendNumber(Player_Option * 100)
         Player_Choice = 0
+        Night_Time = 0
     } else {
         Player_Choice = Player_Option
-        radio.sendNumber(Player_Option * 1000)
+        radio.sendNumber(Player_Option * 10000)
         Player_Choice = 0
-    }
-})
-radio.onReceivedString(function (receivedString) {
-    if (receivedString == "Werewolf Go") {
-        if (Game_On == 1) {
-        	
-        }
+        Night_Time = 0
     }
 })
 input.onButtonPressed(Button.B, function () {
@@ -68,7 +63,9 @@ basic.forever(function () {
         basic.showString("You Died")
     } else {
         if (Night_Time == 1) {
-            if (TownWerewolf == 2) {
+            if (Player_Choice != 0) {
+                basic.showString("ZZZ")
+            } else if (TownWerewolf == 2) {
                 basic.showNumber(Player_Option)
             } else {
                 basic.showString("ZZZ")
