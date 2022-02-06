@@ -27,7 +27,7 @@ input.onButtonPressed(Button.AB, function () {
         Night_Time = 0
     } else {
         Player_Choice = Player_Option
-        radio.sendNumber(Player_Option * 10000)
+        radio.sendNumber(Player_Option * 10)
         Player_Choice = 0
         Night_Time = 0
     }
@@ -51,6 +51,7 @@ let Game_On = 0
 let TownWerewolf = 0
 let Player = 0
 radio.setGroup(173)
+// Don't choose 10
 Player = 2
 TownWerewolf = 1
 Game_On = 0
